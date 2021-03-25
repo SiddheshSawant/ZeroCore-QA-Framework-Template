@@ -13,7 +13,7 @@ Resource                        ../Resources/PO/Home.robot
 #Default Tags                    Trial
 
 #Suite Setup                     Launch Website in the Browser
-git Suite Setup                     Open Headless Chrome
+Suite Setup                     Open Headless Chrome
 #Suite Setup                     Open Headless Firefox
 
 #Test Setup                      Common.Launch Website in the Browser
@@ -23,15 +23,14 @@ Suite Teardown                  End Testing
 
 *** Variables ***
 ${BROWSER}                      Chrome
-${ENV}                          Stage
+${ENV}                          Prod
 #&{URL}                          Prod=https://www.raweng.com/    PreProd=https://demo:demo1234@pre-prod.raweng.com/  Stage=https://demo:demo1234@staging.raweng.com/
-&{URL}                          Prod=${Protocol}${${ENV} Domain}  PreProd=${Protocol}${Basic Auth}${${ENV} Domain}   Stage=${Protocol}${Basic Auth}${${ENV} Domain}
+&{URL}                          Prod=${Protocol}${${ENV}_Domain}  PreProd=${Protocol}%{BASIC_AUTH}${${ENV}_Domain}   Stage=${Protocol}%{BASIC_AUTH}${${ENV}_Domain}
 
 ${Protocol}                     https://
-${Basic Auth}                   demo:demo1234@
-${Prod Domain}                  www.raweng.com/
-${PreProd Domain}               pre-prod.raweng.com/
-${Stage Domain}                 staging.raweng.com/
+${Prod_Domain}                  www.raweng.com/
+${PreProd_Domain}               pre-prod.raweng.com/
+${Stage_Domain}                 staging.raweng.com/
 
 
 *** Test Cases ***
