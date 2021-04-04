@@ -2,6 +2,10 @@
 #Library                         Selenium2Library
 
 *** Variables ***
+${Homepage Location}            ${URL.${ENV}}
+${Homepage Title}               Raw Engineering: Digital Transformation
+${Homepage H1}                  Fast Track Innovation From Vision to Reality
+
 ${Logo Locator}                 xpath=//*[@id="main-header"]/div/a
 ${Logo Alt Text}                Raw Engineering
 ${Logo Hyperlink}               ${URL.${ENV}}
@@ -27,10 +31,8 @@ ${Contact Button Hyperlink}     ${Protocol}${${ENV} Domain}contact-us
 
 
 *** Keywords ***
-Verify Site URL
-    Location Should Be          ${URL.${ENV}}
-    Log Location
-#    Log To Console              \nSite URL Verified
+Verify Website Homepage
+    Verify Page Loaded          ${Homepage Location}    ${Homepage Title}    ${Homepage H1}
 
 Verify Homepage Title
     Title Should Be             Raw Engineering: Digital Transformation
@@ -57,7 +59,6 @@ Keyword 2
 Keyword 3
     Log     No match found for Title, so 'ELSE' case is executed.
 #    comment
-
 
 Verify Banner Section
     Check Header

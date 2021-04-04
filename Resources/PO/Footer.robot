@@ -1,47 +1,48 @@
 *** Settings ***
 #Library                         Selenium2Library
 
+*** Variables ***
+${Footer Text Locator}          xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[1]/h2
+${Footer Text}                  Ready to get started on your next project?
+
+${Get In Touch Locator}         //*[@id="gatsby-focus-wrapper"]/div/footer/div/div[1]/a
+${Get In Touch Text}            GET IN TOUCH
+${Get In Touch Hyperlink}       ${URL.${ENV}}contact-us
+${Get In Touch Target}
+
+${Privacy Locator}              //*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[1]/a
+${Privacy Text}                 Privacy
+${Privacy Hyperlink}            ${URL.${ENV}}privacy-statement
+${Privacy Target}
+
+${Backend Terms of Use Locator}     //*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[2]/a
+${Backend Terms of Use Text}        Backend Terms of Use
+${Backend Terms of Use Hyperlink}   ${URL.${ENV}}backend-terms-of-service
+${Backend Terms of Use Target}
+
+${Twitter Locator}                  //*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[1]/a
+${Twitter Text}
+${Twitter Hyperlink}                https://twitter.com/raweng
+${Twitter Target}                   _blank
 
 *** Keywords ***
 Scroll To Footer
-    Sleep                       1s
-    Scroll To Element           class=title-linethrough
-    Sleep                       1s
-#    Scroll To Element           xpath=//*[@class="title-linethrough"]
-    Sleep                       1s
-    Scroll To Element           class=author-quote
-    Sleep                       2s
-    Scroll To Element           class=soc-footer-logo
-    Sleep                       1s
+    Functions.Scroll To Element         ${Footer Text Locator}
+    Sleep                               2s
 
 Verify Footer Elements
-#    Mouse Down                  class=section-title
-    Element Text Should Be      class=section-title   Ready to get started on your next project?
+    Element Text Should Be      ${Footer Text Locator}      ${Footer Text}
 
-    Mouse Down                  css=#gatsby-focus-wrapper > div > footer > div > div.footer-top.text-center > a
-    Element Text Should Be      css=#gatsby-focus-wrapper > div > footer > div > div.footer-top.text-center > a  GET IN TOUCH
-#    ${Get In Touch Text}=       Get Element Attribute	    css=#gatsby-focus-wrapper > div > footer > div > div.footer-top.text-center > a  value
-#    Log                         Get In Touch button Text = ${Get In Touch Text}
-    ${Get In Touch URL}=        Get Element Attribute	    xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[1]/a  href
-    Log                         Get In Touch button URL = ${Get In Touch URL}
-    Element Attribute Value Should Be  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[1]/a  href    ${URL.${ENV}}contact-us
+    Functions.Verify The Link   ${Get In Touch Locator}     ${Get In Touch Text}    ${Get In Touch Hyperlink}   ${Get In Touch Target}
+    Functions.Verify The Link   ${Privacy Locator}          ${Privacy Text}         ${Privacy Hyperlink}        ${Privacy Target}
+    Functions.Verify The Link   ${Backend Terms of Use Locator}     ${Backend Terms of Use Text}    ${Backend Terms of Use Hyperlink}   ${Backend Terms of Use Target}
+    Functions.Verify The Link   ${Twitter Locator}          ${Twitter Text}         ${Twitter Hyperlink}        ${Twitter Target}
 
-    Mouse Down                  css=#gatsby-focus-wrapper > div > footer > div > div.footer-bottom > div > ul > li:nth-child(1) > a
-    Element Text Should Be      css=#gatsby-focus-wrapper > div > footer > div > div.footer-bottom > div > ul > li:nth-child(1) > a     Privacy
-    ${Privacy URL}=  Get Element Attribute	    css=#gatsby-focus-wrapper > div > footer > div > div.footer-bottom > div > ul > li:nth-child(1) > a   href
-    Log                         Privacy link URL = ${Privacy URL}
-    Element Attribute Value Should Be  css=#gatsby-focus-wrapper > div > footer > div > div.footer-bottom > div > ul > li:nth-child(1) > a   href    ${URL.${ENV}}privacy-statement
 
-    Mouse Down                  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[2]/a
-    Element Text Should Be      xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[2]/a     Backend Terms of Use
-    ${Terms of Use URL}=  Get Element Attribute	    xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[2]/a   href
-    Log                         Backend Terms of Use link URL = ${Terms of Use URL}
-    Element Attribute Value Should Be  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/div/ul/li[2]/a   href    ${URL.${ENV}}backend-terms-of-service
-
-    Mouse Down                  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a
-    ${Linkedin URL}=  Get Element Attribute	    xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a   href
-    Log                         Linkedin link URL = ${Linkedin URL}
-    Element Attribute Value Should Be  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a   href    https://www.linkedin.com/company/raw-engineering
+#    Mouse Down                  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a
+#    ${Linkedin URL}=  Get Element Attribute	    xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a   href
+#    Log                         Linkedin link URL = ${Linkedin URL}
+#    Element Attribute Value Should Be  xpath=//*[@id="gatsby-focus-wrapper"]/div/footer/div/div[2]/ul/li[2]/a   href    https://www.linkedin.com/company/raw-engineering
 
     Element Text Should Be      class=footer-copyright      Copyright © 2021 Raw Engineering LLC. All Rights Reserved.
 

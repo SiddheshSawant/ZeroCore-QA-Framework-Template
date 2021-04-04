@@ -24,7 +24,6 @@ Suite Teardown                  End Testing
 *** Variables ***
 ${BROWSER}                      Chrome
 ${ENV}                          Prod
-#&{URL}                          Prod=https://www.raweng.com/    PreProd=https://demo:demo1234@pre-prod.raweng.com/  Stage=https://demo:demo1234@staging.raweng.com/
 &{URL}                          Prod=${Protocol}${${ENV}_Domain}  PreProd=${Protocol}%{BASIC_AUTH}${${ENV}_Domain}   Stage=${Protocol}%{BASIC_AUTH}${${ENV}_Domain}
 
 ${Protocol}                     https://
@@ -36,7 +35,7 @@ ${Stage_Domain}                 staging.raweng.com/
 *** Test Cases ***
 Step 1 - Verify Onboarding for Website
     [Tags]                      Onboarding
-    Home.Verify Site URL
+    Home.Verify Website Homepage
     Home.Verify Homepage Title
 
 Step 2 - Verify Header Section
@@ -52,7 +51,7 @@ Step 3 - Verify Footer Section
 Step 4 - Verify Home Page
     [Tags]                      Home
     Home.Verify Page Title  #with 'If-ElseIf-Else'
-    Home.Verify Banner Section
+    Home.Verify Banner Sectionvgi
     Home.Verify All Section Headings
     Pass Execution  Skipping this test case as it is under development
     Our Work.Verify Featured Case Studies
